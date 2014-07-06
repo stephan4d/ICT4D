@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml">
+ 
+<form id="MainMenu">
+ <field name="select">
+   <prompt>
+   Welcome to the ICT4D voice service. Please say the application you wish to use or.
+   Press 1 for the weather application.
+   Press 2 for the pluviometry application.
+   </prompt>
+
+   <grammar xml:lang="en-US" root = "VOICES" mode="dtmf">
+      <rule id="VOICES" scope = "public">
+        <one-of>
+          <item> 1 </item>
+          <item> 2 </item>
+        </one-of>
+       </rule>
+     </grammar>
+ 
+   <!-- Grammar for available responses for either "Weather application" or 
+   "Pluviometry       application".-->
+
+   <grammar xml:lang="en-US" root = "VOICES">
+    <rule id="VOICES" scope="public">
+     <one-of>
+ 
+     <!-- If the user says any of the following choices, then the grammar assigns "1" to -->
+     <!-- the select variable. -->
+     <item>
+     <one-of>
+      <item>weather</item>
+      <item>weather application</item>
+      <item>temperature</item>
+     </one-of>
+     <tag>out.select ="1";</tag>
+     </item>
+
+     <!-- If the user says any of the following choices, then the grammar assigns "2" to -->
+     <!-- the select variable. -->
+
+     <item>
+     <one-of>
+      <item>pluviometry</item>
+      <item>pluviometry application</item>
+      <item>rainfall</item>
+     </one-of>
+     <tag>out.select ="2";</tag>
+     </item>
+     </one-of>
+    </rule>
+   </grammar>
+ 
+   <noinput>
+    <prompt>
+     No input was given. Please try again.
+    </prompt>
+    <reprompt/>
+   </noinput>
+ 
+   <nomatch>
+    <prompt>
+     Invalid input. Please try again.
+    </prompt>
+    <reprompt/>
+   </nomatch>
+  </field>
+ 
+  <filled>
+   <if cond="select == '1'">
+      <prompt> Weather application </prompt>
+      <goto next="weatherforecast.xml" />
+   <elseif cond="select == '2'"/>
+      <prompt> Pluviometry application </prompt>
+      <goto next="pluviometry.xml" />
+   </if>
+  </filled>
+</form>
+</vxml>
