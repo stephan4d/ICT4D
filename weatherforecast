@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1">
+ 
+<meta name="maintainer" />
+ 
+<form id="MainMenu">
+  <field name="SelectRegion">
+   <prompt>
+     Welcome to the weather application. To receive information about the weather  
+ forecast for tomorrow please say your region.
+   </prompt>
+ 
+  <!-- Define the grammar. -->
+  <grammar xml:lang="en-US" root="myrule" version="1.0" mode="voice" tag-format="semantics/1.0">
+   <rule id="myrule">
+   <one-of>
+    <item> Boucle du Mouhoun </item>	
+    <item> Cascades	</item>
+    <item> Centre	</item>
+    <item> Centre-Est	</item>
+    <item> Centre-Nord	</item>
+    <item> Centre-Ouest	</item>
+    <item> Centre-Sud	</item>
+    <item> Est	</item>
+    <item> Hauts-Bassins </item>	
+    <item> Nord	</item>
+    <item> Plateau-Central </item>	
+    <item> Sahel	</item>
+    <item> Sud-Ouest </item>
+    </one-of>
+   </rule>
+   </grammar>
+   
+   	
+   <!-- The user was silent, restart the field. -->
+   <noinput>
+    No response was made. Please say your region.
+    <goto nextitem="SelectRegion" />
+   </noinput>
+ 
+   <!-- The user said something that was not defined in our grammar. -->
+   <nomatch>
+     The region was not recognized. Please try again.
+    <goto nextitem="SelectRegion" />
+   </nomatch>
+  </field>
+ 
+  <!-- Checks the "SelectRegion" value against each of the valid values. -->
+  <filled namelist="SelectRegion">
+  <if cond="SelectRegion == 'Boucle du Mouhoun'">
+   <prompt>
+     No clouds and it will be dry, the temperature in Boucle du Mouhoun will be 30 degrees. 
+   </prompt>
+  <elseif cond="SelectRegion == 'Cascades'" />
+   <prompt>
+     No clouds and it will be dry, the temperature in Cascades will be around 27 degrees.
+   </prompt>
+  <elseif cond="SelectRegion == 'Centre'" />
+   <prompt>
+     Cloudy and no rainfall, the temperature in Centre will be 26 degrees.
+   </prompt>
+  <elseif cond="SelectRegion == 'Centre-Est'" />
+   <prompt>
+     Cloudy and medium rainfall, the temperature in Centre-Estis will be 26 degrees.
+   </prompt>
+  <elseif cond="SelectRegion == 'Centre-Ouest'" />
+   <prompt>
+      Cloudy and medium rainfall, the temperature in Centre-Ouest will be 25 degrees.
+   </prompt>
+  <elseif cond="SelectRegion == 'Centre-Sud'" />
+   <prompt>
+     No clouds and it will be dry, the temperature in Centre-Sud will be 25 degrees.
+   </prompt>
+   <elseif cond="SelectRegion == 'Est'" />
+   <prompt>
+     No clouds and it will be dry,  the temperature in Est will be 26 degrees.
+   </prompt>
+   <elseif cond="SelectRegion == 'Hauts-Bassins'" />
+   <prompt>
+     Cloudy and medium rainfall, the temperature in Hauts-Bassins will be 27 degrees.
+   </prompt>
+   <elseif cond="SelectRegion == 'Nord'" />
+   <prompt>
+      No clouds and it will be dry, the temperature in Nord will be 30 degrees.
+   </prompt>
+   <elseif cond="SelectRegion == 'Plateau-Central'" />
+   <prompt>
+      No clouds and it will be dry, the temperature in Plateau-Central will be 24 degrees.
+   </prompt>
+   <elseif cond="SelectRegion == 'Sahel'" />
+   <prompt>
+      No clouds and it will be dry, the temperature in Sahel will be 34 degrees.
+   </prompt>
+   <elseif cond="SelectRegion == 'Sud-Ouest'" />
+   <prompt>
+      No clouds and it will be dry, the temperature in Sud-Ouest will be 32 degrees.
+   </prompt>
+  </if>
+  <goto nextitem="SelectRegion" />
+</filled>
+</form>
+</vxml>
