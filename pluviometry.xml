@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<vxml version="2.1">
+  <form>
+    <field name="date" type="digits?minlength=8;maxlength=8">
+      <prompt>
+        Please enter the date.
+      </prompt>
+	<nomatch>
+    	<prompt>
+     	Invalid input. Please try again.
+    	</prompt>
+    	<reprompt/>
+   	</nomatch>
+    </field>
+
+ <field name="region">
+      <prompt>
+        Please say your region.
+      </prompt>
+  	<grammar xml:lang="en-US" root="myrule" version="1.0" mode="voice" 
+	  tag-format="semantics/1.0">
+   	<rule id="myrule">
+   	  <one-of>
+    	  <item> Boucle du Mouhoun </item>	
+    		<item> Cascades	</item>
+    		<item> Centre	</item>
+    		<item> Centre-Est</item>
+    		<item> Centre-Nord</item>
+   		  <item> Centre-Ouest</item>
+		    <item> Centre-Sud</item>
+		    <item> Est</item>
+    		<item> Hauts-Bassins </item>	
+	     	<item> Nord</item>
+    		<item> Plateau-Central </item>	
+    		<item> Sahel	</item>
+    		<item> Sud-Ouest </item>
+    	</one-of>
+     </rule>
+   </grammar>
+   
+   <!-- No input was given, restart the field. -->
+   <noinput>
+    No response was made. Please say your region.
+    <goto nextitem = "region"/>; 
+   </noinput>
+ 
+   <!-- The user said something that was not defined in the grammar. -->
+   <nomatch>
+     The region was not recognized. Please try again.
+     <goto nextitem = "region"/>; 
+   </nomatch>
+   
+   <filled>
+        <prompt>You said: <value expr="region"/></prompt>
+        <break time="1000" />
+   </filled> 	
+  </field>
+
+ <field name="measure08H" type="digits">
+        <prompt>
+          Please enter the data from 08 hours.
+        </prompt>
+      <filled>
+        <prompt>You entered: <value expr="measure08H"/></prompt>
+        <break time="1000" />
+      </filled> 
+  </field>
+  
+ <field name="measure18H" type="digits">
+      <prompt>
+        Please enter the data from 18 hours
+      </prompt>
+      <filled>
+        <prompt>You entered: <value expr="measure18H"/></prompt>
+        <break time="1000" />
+      </filled> 
+  </field>
+  
+  <block>
+    <prompt>
+      Thank you, the information will be processed. Goodbye.
+    </prompt>
+   <!-- Use submit to send it to php file <submit namelist="date region measure08H measure18H" next="location"/> -->
+  </block>
+    
+  </form>
+</vxml>
