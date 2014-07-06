@@ -1,0 +1,23 @@
+<?php
+$dbhost = 'localhost';
+$dbuser = 'semict4d';
+$dbpass = 'dbvoicexml4d';
+$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+if(! $conn )
+{
+  die('Failed to connect to MySQL:  ' . mysql_error());
+}
+
+$sql = 'INSERT INTO rainfall_data '.
+       '( date, location, measure08H, measure18H, measureTotal) '.
+       'VALUES (20140615, "Batie", 0.1, 0.0, 0.1)';
+
+mysql_select_db('pluviometry');
+$retval = mysql_query( $sql, $conn );
+if(! $retval )
+{
+  die('Could not enter data: ' . mysql_error());
+}
+echo "Entered data successfully\n";
+mysql_close($conn);
+?>
