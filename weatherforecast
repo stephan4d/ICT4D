@@ -10,7 +10,6 @@
  forecast for tomorrow please say your region.
    </prompt>
  
-  <!-- Define the grammar. -->
   <grammar xml:lang="en-US" root="myrule" version="1.0" mode="voice" tag-format="semantics/1.0">
    <rule id="myrule">
    <one-of>
@@ -32,13 +31,13 @@
    </grammar>
    
    	
-   <!-- The user was silent, restart the field. -->
+   <!-- No input was provided, restart the field. -->
    <noinput>
     No response was made. Please say your region.
     <goto nextitem="SelectRegion" />
    </noinput>
  
-   <!-- The user said something that was not defined in our grammar. -->
+   <!-- The user said something that was not defined in the grammar. -->
    <nomatch>
      The region was not recognized. Please try again.
     <goto nextitem="SelectRegion" />
